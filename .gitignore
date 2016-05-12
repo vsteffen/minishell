@@ -1,5 +1,5 @@
 # object files
-objs/*
+objs
 *.o
 libft/objs 
 
