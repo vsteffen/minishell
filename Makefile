@@ -6,7 +6,7 @@
 #    By: vsteffen <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/03/03 17:41:16 by vsteffen          #+#    #+#              #
-#    Updated: 2016/05/12 17:16:57 by vsteffen         ###   ########.fr        #
+#    Updated: 2016/05/12 17:48:27 by vsteffen         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,8 @@ SRC = maintest.c
 
 OBJ = $(patsubst %.c, $(OPATH)/%.o, $(SRC))
 
-CFLAGS = -I $(HPATH) -Wall -Wextra -Werror -I $(HPATH)
+CFLAGS = -I $(HPATH) -I $(HPATH)
+# -Wall -Wextra -Werror
 
 ROOT =		$(shell /bin/pwd)
 OPATH =		$(ROOT)/objs

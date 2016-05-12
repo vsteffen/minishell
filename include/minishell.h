@@ -6,7 +6,7 @@
 /*   By: vsteffen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/12 17:18:58 by vsteffen          #+#    #+#             */
-/*   Updated: 2016/05/12 17:21:43 by vsteffen         ###   ########.fr       */
+/*   Updated: 2016/05/12 18:04:37 by vsteffen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 # include <sys/xattr.h>
 # include <pwd.h>
 # include <grp.h>
+# include <signal.h>
 # include "../libft/include/libft.h"
 
 typedef struct			s_list_ls
@@ -42,6 +43,10 @@ typedef struct			s_d
 	char				*path;
 }						t_d;
 
-int				main(int ac, char **av);
+typedef void (*t_handler)(int);
+
+int						main(int ac, char **av);
+
+t_handler				signal(int sig, t_handler func);
 
 #endif
