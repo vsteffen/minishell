@@ -1,0 +1,17 @@
+# object files
+objs/*
+*.o
+
+# binary
+minishell
+
+# debug
+*.dSYM
+
+# system crap
+--*
+._*
+.DS_Store
+
+# editor files
+*.swp
