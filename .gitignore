@@ -1,9 +1,11 @@
 # object files
 objs/*
 *.o
+libft/objs 
 
-# binary
+# binary and libray
 minishell
+libft/libft.a
 
 # debug
 *.dSYM
