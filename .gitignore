@@ -16,4 +16,4 @@ libft/libft.a
 .DS_Store
 
 # editor files
-*.swp
+**/*.swp
