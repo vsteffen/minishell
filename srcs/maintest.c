@@ -27,23 +27,26 @@ int		main(int ac, char **av)
 
 	while (1)
 	{
+		ft_color_style(FG_YELLOW, "ʕ•́ᴥ•̀ʔっ ➜  ");
 		get_next_line(0, &gnl_buff);
 		printf("gnl_buff = %s\n", gnl_buff);
 		if (strcmp(gnl_buff, "exit") == 0)
 			exit(0);
-	}
-	father = fork();
-	if (father > 0)
-	{
-		wait(0);
-		printf("I'am your ... father ! ... BITCH\n");
-	}
-	if (father == 0)
-	{
-		sleep(1);
-		execve("/bin/ls", av, NULL);
-	}
-	
+		father = fork();
+		printf("father = %d\n", father);
+		if (father > 0)
+		{
+		//	wait(0);
+		//	printf("I'am your ... father = %d ... BITCH !\n", father);
+		}
+		if (father == 0)
+		{
+			//execve("/bin/ls", av, NULL);
+			//kill(father, SIGKILL);
+		}
+		kill(father, SIGKILL);
+		ft_putchar('\n');
+}
 /*	if (signal(SIGFPE, sig_fpe) == SIG_ERR)
 	{
 		printf("Le gestionnaire de signal pour SIG_FPE n'a pu etre defini.");
