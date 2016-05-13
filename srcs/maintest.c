@@ -18,6 +18,11 @@ void sig_fpe(int sig)
 	printf("PASSED IN SIG_FPE\n");
 }
 
+void print_bash(void)
+{
+	ft_color_style(FG_YELLOW, NULL, "ʕ•́ᴥ•̀ʔっ ➜  ", 0);
+}
+
 int		main(int ac, char **av)
 {
 	char	buf[1];
@@ -25,9 +30,10 @@ int		main(int ac, char **av)
 	pid_t		father;
 	char	*gnl_buff;
 
+//	ft_color_style(BG_LBLUE, NULL, "\n", 1);
 	while (1)
 	{
-		ft_color_style(FG_YELLOW, "ʕ•́ᴥ•̀ʔっ ➜  ");
+		print_bash();
 		get_next_line(0, &gnl_buff);
 		printf("gnl_buff = %s\n", gnl_buff);
 		if (strcmp(gnl_buff, "exit") == 0)
