@@ -6,7 +6,7 @@
 /*   By: vsteffen <vsteffen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/22 20:42:40 by vsteffen          #+#    #+#             */
-/*   Updated: 2016/05/13 19:18:22 by vsteffen         ###   ########.fr       */
+/*   Updated: 2016/05/15 16:09:07 by vsteffen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ void				ft_clear(void);
 void				ft_color_style(char *color1, char *color2, char *str,
 		int again);
 int					get_next_line(const int fd, char **line);
+void				ft_superstr(char *str1, char *str2, char *str3, char *str4);
 void				ft_exit_prog(char *status, char *color, int debug);
 
 float				ft_rounded(float number, int decimal);
