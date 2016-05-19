@@ -6,7 +6,7 @@
 /*   By: vsteffen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/12 17:18:58 by vsteffen          #+#    #+#             */
-/*   Updated: 2016/05/12 18:04:37 by vsteffen         ###   ########.fr       */
+/*   Updated: 2016/05/19 19:16:35 by vsteffen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,22 +30,27 @@
 # include <signal.h>
 # include "../libft/include/libft.h"
 
-typedef struct			s_list_ls
+typedef struct			s_lst
 {
 	char				*name;
 	char				*path;
-	struct s_list_ls	*next;
-}						t_list_ls;
+
+
+	char				*key;
+	char				*value;
+	struct s_lst		*next;
+}						t_lst;
 
 typedef struct			s_d
 {
 	char				*name;
 	char				*path;
+	
+	t_lst				*lst_env;
+	int					nb_arg;
 }						t_d;
 
 typedef void (*t_handler)(int);
-
-int						main(int ac, char **av);
 
 t_handler				signal(int sig, t_handler func);
 
