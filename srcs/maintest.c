@@ -6,7 +6,7 @@
 /*   By: vsteffen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/12 17:17:11 by vsteffen          #+#    #+#             */
-/*   Updated: 2016/05/15 20:26:57 by vsteffen         ###   ########.fr       */
+/*   Updated: 2016/05/19 17:03:56 by vsteffen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,24 @@ int		nb_param(char *gnl_buff)
 			pos++;
 		nb++;
 	}
+	printf("nb_param = %d\n", nb);
 	return (nb);
 }
 
-void	transform_gnl(char *gnl_buff, char **arg)
+void	print_tab(char **tab)
+{
+	int		i;
+
+	i = 0;
+	while (tab[i] != NULL)
+	{
+		printf("tab[%d] = \"%s\"\n", i, tab[i]);
+		i++;
+	}
+	
+}
+
+char		**transform_gnl(char *gnl_buff)
 {
 	int		nb_arg;
 	int		pos;
@@ -68,17 +82,35 @@ void	transform_gnl(char *gnl_buff, char **arg)
 	//		printf("%c ", gnl_buff[pos]);
 			pos++;
 	//	}
-	//	printf("   /// pos = %d && pos - deb = %d\n", pos, pos - deb);
+//		printf("   /// pos = %d && pos - deb = %d\n", pos, pos - deb);
 		//if (!(arg_prog[nb_arg] = (char *)malloc(sizeof(char) * (pos - deb + 1))))
 		//	ft_exit_prog("Fail to malloc new tab of argv\n", FG_RED, 0);
 		arg_prog[nb_arg] = ft_strsub(gnl_buff, deb, pos - deb);
 		nb_arg++;
+		if (!gnl_buff[pos])
+			continue ;
 		pos++;
 	}
 	arg_prog[nb_arg] = NULL;
+//	printf("nb_arg = %d\n", nb_arg);
+	return (arg_prog);
 //	printf("strlen de strsub = %lu\n", strlen(strsub));
 //	printf("	nb_arg = %d\n", nb_arg);
 //	printf("strsub = \"%s\"\n", strsub);
+}
+
+void		free_arg(char **arg)
+{
+	int		i;
+
+	i = 0;
+	while (arg[i] != NULL)
+	{
+		free(arg[i]);
+		i++;
+	}
+	free(arg);
+	printf("SUCCESS FOR FREE\n");
 }
 
 int		main(int ac, char **av)
@@ -100,7 +132,9 @@ int		main(int ac, char **av)
 		printf("gnl_buff = %s\n", gnl_buff);
 		if (strcmp(gnl_buff, "exit") == 0)
 			exit(0);
-		transform_gnl(gnl_buff, &*arg);
+		arg = transform_gnl(gnl_buff);
+		print_tab(arg);
+		free_arg(arg);
 	}
 /*		father = fork();
 		//printf("father = %d\n", father);
