@@ -32,10 +32,8 @@
 
 typedef struct			s_lst
 {
-	char				*name;
-	char				*path;
-
-
+//	char				*name;
+	//char				*path;
 	char				*key;
 	char				*value;
 	struct s_lst		*next;
@@ -45,13 +43,18 @@ typedef struct			s_d
 {
 	char				*name;
 	char				*path;
-	
+
 	t_lst				*lst_env;
+	t_lst				*env_end;
 	int					nb_arg;
+	char				*gnl_buff;
+	char				**buff;
 }						t_d;
 
 typedef void (*t_handler)(int);
 
 t_handler				signal(int sig, t_handler func);
+
+void ft_env(t_lst *list);
 
 #endif

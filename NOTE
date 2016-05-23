@@ -1,7 +1,7 @@
 TODO :
 
 - REMETTRE LES FLAGS DE COMPILATIONS
-
+- verifier si on envoit un parametre a setenv
 
 - CHDIR
 Remplace le répertoire de travail courant du processus appelant par
