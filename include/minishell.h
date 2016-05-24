@@ -49,12 +49,45 @@ typedef struct			s_d
 	int					nb_arg;
 	char				*gnl_buff;
 	char				**buff;
+
+	char			*pwd;
+	char			*oldpwd;
+	char			*shlvl;
+	char			*home;
+	char			*shell;
+	char			**exec;
+
+	int				cmd_status;
 }						t_d;
 
 typedef void (*t_handler)(int);
 
 t_handler				signal(int sig, t_handler func);
 
-void ft_env(t_lst *list);
+void		print_tab(char **tab);
+
+int			key_exist(t_lst *list, char *key, char *value, t_d *d);
+void 		ft_add_env(t_d *d, char *key, char *value);
+int 		ft_setenv(t_d *d);
+
+t_lst   *env_to_list(char **env, t_d *d, int i, t_lst *list);
+int			if_no_arg(t_d *d, char *first_arg, int status);
+int			ft_env(t_lst *list);
+
+
+char		*get_env_key(char *env_line, int *end_key);
+char		*get_env_value(char *env_line, int *end_key);
+void 		get_key_important(t_d *d, char *key, char *value);
+void		reset_key_important(t_d *d, char *key);
+t_lst		*lst_new(t_d *d, char *env_line, char *key, char *value);
+t_lst		*add_elem(t_lst *list, t_d *d, char *env_line);
+
+int			unsetenv_check_lst(t_lst *list, t_d *d, char *key, int *arg);
+int			ft_unsetenv(t_d *d);
+
+int			ft_cd(t_d *d);
+
+int   try_execve(t_d *d);
+int   launch_execve(t_d *d, pid_t father);
 
 #endif

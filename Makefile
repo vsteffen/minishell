@@ -23,7 +23,14 @@ LIBS = -framework OpenGL \
 	   -framework AppKit \
 	   $(ROOT)/libft/libft.a
 
-SRC = maintest.c
+SRC = maintest.c \
+			ft_env.c \
+			ft_setenv.c \
+			ft_unsetenv.c \
+			ft_cd.c \
+			ft_list.c \
+			execve.c \
+
 
 # OBJ_NAME = $(wildcard $(ROOT)/srcs/$(SRC))
 

@@ -3,6 +3,17 @@ TODO :
 - REMETTRE LES FLAGS DE COMPILATIONS
 - verifier si on envoit un parametre a setenv
 
+
+
+
+
+unsetenv : 
+SSH_AUTH_SOCK Apple_PubSub_Socket_Render COLORFGBG ITERM_PROFILE XPC_FLAGS PWD SHELL SECURITYSESSIONID LC_CTYPE TERM_PROGRAM PATH COMMAND_MODE TERM HOME TMPDIR USER XPC_SERVICE_NAME LOGNAME ITERM_SESSION_ID __CF_USER_TEXT_ENCODING SHLVL OLDPWD ZSH PAGER LESS LSCOLORS HOMEBREW_CACHE HOMEBREW_TEMP _
+
+
+
+
+
 - CHDIR
 Remplace le répertoire de travail courant du processus appelant par
 celui indiqué dans le chemin path.
