@@ -3,7 +3,7 @@ objs
 *.o
 libft/objs 
 
-# binary and libray
+# binary and library
 minishell
 libft/libft.a
 
