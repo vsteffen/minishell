@@ -49,12 +49,13 @@ int   launch_execve(t_d *d, pid_t father)
     wait(0);
 	else
   {
+		signal(2, SIG_DFL);
 		env_to_char(d);
     if (execve(d->path, d->buff, d->new_env) == -1)
 			exit(1);
-//		kill(father, SIGKILL);
 		return (1);
   }
+	signal(2, SIG_IGN);
   free(d->path);
   return (0);
 }

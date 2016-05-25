@@ -76,11 +76,19 @@ void env_to_char(t_d *d)
 t_lst   *env_to_list(char **env, t_d *d, int i, t_lst *list)
 {
 	t_lst	*tmp;
+	int		nb;
 
 	tmp = NULL;
 	while (env[i])
 	{
 		list = add_elem(list, d, env[i]);
+		if (ft_strequ(list->key, "SHLVL"))
+		{
+			nb = ft_atoi(list->value);
+			nb++;
+			free(list->value);
+			list->value = ft_itoa(nb);
+		}
 		if (i == 0)
 			tmp = list;
 		i++;
