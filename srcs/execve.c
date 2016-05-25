@@ -50,11 +50,11 @@ int   launch_execve(t_d *d, pid_t father)
   if (father > 0)
   {
     execve(d->path, d->buff, NULL);
-      return (1);
+//		kill(father, SIGKILL);
+		exit(EXIT_SUCCESS);
+		return (1);
   }
   free(d->path);
-  if (father > 0)
-      kill(father, SIGKILL);
   return (0);
 }
 

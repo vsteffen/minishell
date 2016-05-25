@@ -14,6 +14,8 @@
 
 int ft_cd(t_d *d)
 {
+  printf("d->pwd = \"%s\"\n", d->pwd);
+  printf("d->oldpwd = \"%s\"\n", d->oldpwd);  
   printf("d->exec[0] = \"%s\"\n", d->exec[0]);
   return (1);
 }

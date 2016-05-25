@@ -41,7 +41,6 @@ void get_exec_tab(t_d *d, char *value)
 
 	ptr = ft_strchr(value, '=');
 	d->exec = ft_strsplit(value, ':');
-	print_tab(d->exec);
 }
 
 void reset_exec_tab(t_d *d, char *value, int status)
@@ -88,9 +87,9 @@ void get_key_important(t_d *d, char *key, char *value)
 
 void	reset_key_important(t_d *d, char *key)
 {
-	if (ft_strequ(key, "PWD"))
-		d->pwd = NULL;
-	else if (ft_strequ(key, "OLDPWD"))
+//	if (ft_strequ(key, "PWD"))
+//		d->pwd = NULL;
+	if (ft_strequ(key, "OLDPWD"))
 		d->oldpwd = NULL;
 	else if (ft_strequ(key, "SHLVL"))
 		d->shlvl = NULL;

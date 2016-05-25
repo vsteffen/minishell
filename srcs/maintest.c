@@ -136,6 +136,54 @@ int 	ft_isbuiltin(t_d *d)
 	return (0);
 }
 
+void ft_add_pwd(t_d *d, int oldpwd_defined, int pwd_defined)
+{
+	t_lst		*list;
+
+	if (!d->lst_env)
+	{
+		if (pwd_defined)
+			list = lst_new(d, NULL, "PWD", d->pwd);
+		else if (oldpwd_defined)
+			list = lst_new(d, NULL, "OLDPWD", d->pwd);
+		d->lst_env = list;
+		d->env_end = list;
+	}
+	else
+	{
+		list = d->env_end;
+		if (pwd_defined)
+			list = lst_new(d, NULL, "PWD", d->pwd);
+		else if (oldpwd_defined)
+			list = lst_new(d, NULL, "OLDPWD", d->pwd);
+		d->env_end = list->next;
+	}
+}
+
+void get_flocation(t_d *d)
+{
+	t_lst	*list;
+	int		oldpwd_defined;
+	int		pwd_defined;
+
+	getcwd(d->pwd, d->pwd_size);
+	list = d->lst_env;
+	oldpwd_defined = 1;
+	pwd_defined = 1;
+	while (list && pwd_defined && oldpwd_defined)
+	{
+		if (ft_strequ(list->value, "PWD"))
+		{
+			list->value = d->pwd;
+			pwd_defined = 0;
+		}
+		if (ft_strequ(list
+		list = list->next;
+	}
+	if (oldpwd_defined || pwd_defined)
+		ft_add_pwd(d, pwd_defined, oldpwd_defined);
+}
+
 int		main(int ac, char **av, char **env)
 {
 	char	buf[1];
@@ -152,6 +200,7 @@ int		main(int ac, char **av, char **env)
 
 	struct_ini(&d);
 	d.lst_env = env_to_list(env, &d, 0, NULL);
+	get_flocation(&d);
 	//ft_env(d.lst_env);
 	while (42)
 	{

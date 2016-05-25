@@ -51,6 +51,7 @@ typedef struct			s_d
 	char				**buff;
 
 	char			*pwd;
+	size_t		pwd_size;
 	char			*oldpwd;
 	char			*shlvl;
 	char			*home;
