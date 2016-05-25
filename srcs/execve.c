@@ -45,13 +45,14 @@ int   launch_execve(t_d *d, pid_t father)
 {
   father = fork();
 
-  if (father == 0)
+  if (father != 0)
     wait(0);
-  if (father > 0)
+	else
   {
-    execve(d->path, d->buff, NULL);
+		env_to_char(d);
+    if (execve(d->path, d->buff, d->new_env) == -1)
+			exit(1);
 //		kill(father, SIGKILL);
-		exit(EXIT_SUCCESS);
 		return (1);
   }
   free(d->path);
@@ -60,19 +61,29 @@ int   launch_execve(t_d *d, pid_t father)
 
 int   try_execve(t_d *d)
 {
-  int   i;
+	int   i;
+	char *ptr;
 
-  i = 0;
-  if (d->buff[0])
-  {
-    while (d->exec[i])
-    {
-      d->path = ft_pathjoin(d->exec[i], d->buff[0]);
-      if (access(d->path, X_OK) == 0)
-        return (1);
-      free(d->path);
-      i++;
-    }
-  }
-  return (0);
+	i = 0;
+	if (d->buff[0])
+	{
+		if ((ptr = ft_strchr(d->buff[0], '/')))
+		{
+			d->path = ft_strdup(d->buff[0]);
+			if (access(d->path, X_OK) == 0)
+				return (1);
+		}
+		else
+		{
+			while (d->exec[i])
+			{
+				d->path = ft_pathjoin(d->exec[i], d->buff[0]);
+				if (access(d->path, X_OK) == 0)
+					return (1);
+				free(d->path);
+				i++;
+			}
+		}
+	}
+	return (0);
 }

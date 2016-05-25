@@ -57,7 +57,7 @@ typedef struct			s_d
 	char			*home;
 	char			*shell;
 	char			**exec;
-
+	char			**new_env;
 	int				cmd_status;
 }						t_d;
 
@@ -71,6 +71,7 @@ int			key_exist(t_lst *list, char *key, char *value, t_d *d);
 void 		ft_add_env(t_d *d, char *key, char *value);
 int 		ft_setenv(t_d *d);
 
+char		*ft_envjoin(char const *s1, char const *s2);
 t_lst   *env_to_list(char **env, t_d *d, int i, t_lst *list);
 int			if_no_arg(t_d *d, char *first_arg, int status);
 int			ft_env(t_lst *list);
@@ -88,6 +89,7 @@ int			ft_unsetenv(t_d *d);
 
 int			ft_cd(t_d *d);
 
+void env_to_char(t_d *d);
 int   try_execve(t_d *d);
 int   launch_execve(t_d *d, pid_t father);
 
