@@ -138,7 +138,7 @@ int 	ft_isbuiltin(t_d *d)
 		return (ft_cd(d));
 	return (0);
 }
-
+/*
 void ft_add_pwd(t_d *d, int oldpwd_defined, int pwd_defined)
 {
 	t_lst		*list;
@@ -162,6 +162,7 @@ void ft_add_pwd(t_d *d, int oldpwd_defined, int pwd_defined)
 		d->env_end = list->next;
 	}
 }
+*/
 /*
 void get_flocation(t_d *d)
 {

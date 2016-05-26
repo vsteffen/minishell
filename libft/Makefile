@@ -92,7 +92,8 @@ SRC = ft_atoi.c \
 	  ft_qsort_tab_int.c \
 	  ft_qsortr_tab_int.c \
 	  ft_qsort_tab_str.c \
-	  ft_qsortr_tab_str.c
+	  ft_qsortr_tab_str.c \
+	  ft_superstr.c
 
 OBJ = $(patsubst %.c, $(OPATH)/%.o, $(SRC))
 
