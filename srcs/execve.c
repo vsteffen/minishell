@@ -6,13 +6,13 @@
 /*   By: vsteffen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/24 18:26:27 by vsteffen          #+#    #+#             */
-/*   Updated: 2016/05/24 18:26:44 by vsteffen         ###   ########.fr       */
+/*   Updated: 2016/05/26 21:08:25 by vsteffen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char		*ft_pathjoin(char const *s1, char const *s2)
+char	*ft_pathjoin(char const *s1, char const *s2)
 {
 	size_t	len_t;
 	size_t	len_s1;
@@ -41,29 +41,28 @@ char		*ft_pathjoin(char const *s1, char const *s2)
 	return (NULL);
 }
 
-int   launch_execve(t_d *d, pid_t father)
+int		launch_execve(t_d *d, pid_t father)
 {
-  father = fork();
-
-  if (father != 0)
-    wait(0);
+	father = fork();
+	if (father != 0)
+		wait(0);
 	else
-  {
+	{
 		signal(2, SIG_DFL);
 		env_to_char(d);
-    if (execve(d->path, d->buff, d->new_env) == -1)
+		if (execve(d->path, d->buff, d->new_env) == -1)
 			exit(1);
 		return (1);
-  }
+	}
 	signal(2, SIG_IGN);
-  free(d->path);
-  return (0);
+	free(d->path);
+	return (0);
 }
 
-int   try_execve(t_d *d)
+int		try_execve(t_d *d)
 {
-	int   i;
-	char *ptr;
+	int		i;
+	char	*ptr;
 
 	i = 0;
 	if (d->buff[0])
