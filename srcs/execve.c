@@ -41,16 +41,17 @@ char	*ft_pathjoin(char const *s1, char const *s2)
 	return (NULL);
 }
 
-int		launch_execve(t_d *d, pid_t father)
+int		launch_execve(t_d *d)
 {
-	int		status;
+	int			status;
+	pid_t		son;
 
 	if (d->cmd_status == 0)
 		return (0);
-	father = fork();
-	if (father != 0)
+	son = fork();
+	if (son != 0)
 	{
-		wait(&status);
+		waitpid(son, &status, 0);
 		if (WIFEXITED(status))
 			if (WEXITSTATUS(status) != 0)
 				d->cmd_status = 0;

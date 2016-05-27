@@ -6,7 +6,7 @@
 /*   By: vsteffen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/12 17:17:11 by vsteffen          #+#    #+#             */
-/*   Updated: 2016/05/27 18:41:06 by vsteffen         ###   ########.fr       */
+/*   Updated: 2016/05/27 20:19:12 by vsteffen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,22 +70,23 @@ void		main2(t_d *d)
 
 int			main(int ac, char **av, char **env)
 {
-	pid_t		father;
 	t_d			d;
+	char		*oldptr;
 
+	oldptr = NULL;
 	av[ac] = av[ac];
-	father = 0;
 	struct_ini(&d, env);
 	while (get_next_line(0, &(d.gnl_buff)))
 	{
+		if (d.gnl_buff == oldptr)
+			return (-1);
+		oldptr = d.gnl_buff;
 		d.buff = transform_str(&d, 0, 0);
 		if (ft_isbuiltin(&d))
 		{
 		}
 		else if (try_execve(&d))
-		{
-			launch_execve(&d, father);
-		}
+			launch_execve(&d);
 		else
 		{
 			if (d.buff[0] != NULL)

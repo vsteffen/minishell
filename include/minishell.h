@@ -93,7 +93,7 @@ int						ft_cd(t_d *d);
 
 void					env_to_char(t_d *d, int i, int tmp);
 int						try_execve(t_d *d);
-int						launch_execve(t_d *d, pid_t father);
+int						launch_execve(t_d *d);
 
 void					print_bash(t_d *d);
 int						nb_param(char *gnl_buff);
