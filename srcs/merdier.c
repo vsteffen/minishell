@@ -6,15 +6,16 @@
 /*   By: vsteffen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/26 21:00:47 by vsteffen          #+#    #+#             */
-/*   Updated: 2016/05/26 21:05:33 by vsteffen         ###   ########.fr       */
+/*   Updated: 2016/05/27 16:55:25 by vsteffen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "minishell.h"
+#include "minishell.h"
 
 void		print_bash(t_d *d)
 {
 	char *color;
+	char *pwd;
 
 	if (d->cmd_status == 0)
 		color = FG_RED;
@@ -22,8 +23,16 @@ void		print_bash(t_d *d)
 		color = FG_GREEN;
 	else
 		color = FG_YELLOW;
-	ft_color_style(color, NULL, "ʕ•́ᴥ•̀ʔっ ➜  ", 0);
+	pwd = getcwd(NULL, 255);
+	ft_color_style(color, NULL, "ʕ•́ᴥ•̀ʔ ", 0);
+	ft_color_style(FG_LCYAN, NULL, NULL, 1);
+	if (pwd == NULL)
+		ft_superstr("<", "UNKNOWN", "> ", NULL);
+	else
+		ft_superstr("<", pwd, "> ", NULL);
+	ft_color_style(NULL, NULL, NULL, 0);
 	d->cmd_status = 1;
+	free(pwd);
 }
 
 int			nb_param(char *gnl_buff)

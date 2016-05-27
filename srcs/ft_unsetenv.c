@@ -6,7 +6,7 @@
 /*   By: vsteffen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/24 15:02:28 by vsteffen          #+#    #+#             */
-/*   Updated: 2016/05/26 21:09:03 by vsteffen         ###   ########.fr       */
+/*   Updated: 2016/05/27 16:52:22 by vsteffen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,10 @@ int		unsetenv_check_lst(t_lst *list, t_d *d, char *key, int *arg)
 	return (0);
 }
 
-int	ft_unsetenv(t_d *d)
+int		ft_unsetenv(t_d *d, int arg)
 {
 	t_lst		*list;
-	int			arg;
 
-	arg = 1;
 	if_no_arg(d, d->buff[arg], 0);
 	while (d->buff[arg] != '\0' && d->lst_env)
 	{

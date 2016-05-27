@@ -6,7 +6,7 @@
 /*   By: vsteffen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/24 18:26:27 by vsteffen          #+#    #+#             */
-/*   Updated: 2016/05/26 21:08:25 by vsteffen         ###   ########.fr       */
+/*   Updated: 2016/05/27 20:04:38 by vsteffen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,19 +43,47 @@ char	*ft_pathjoin(char const *s1, char const *s2)
 
 int		launch_execve(t_d *d, pid_t father)
 {
+	int		status;
+
+	if (d->cmd_status == 0)
+		return (0);
 	father = fork();
 	if (father != 0)
-		wait(0);
+	{
+		wait(&status);
+		if (WIFEXITED(status))
+			if (WEXITSTATUS(status) != 0)
+				d->cmd_status = 0;
+	}
 	else
 	{
 		signal(2, SIG_DFL);
-		env_to_char(d);
+		env_to_char(d, 0, 0);
 		if (execve(d->path, d->buff, d->new_env) == -1)
 			exit(1);
 		return (1);
 	}
 	signal(2, SIG_IGN);
 	free(d->path);
+	return (0);
+}
+
+int		try_execve2(t_d *d)
+{
+	t_stat		stat;
+	int			ret;
+
+	d->path = ft_strdup(d->buff[0]);
+	if (access(d->path, X_OK) == 0)
+	{
+		ret = lstat(d->path, &(stat));
+		if (S_ISDIR(stat.st_mode))
+		{
+			ft_superstr("zsh: ", d->path, ": is a directory\n", NULL);
+			d->cmd_status = 0;
+		}
+		return (1);
+	}
 	return (0);
 }
 
@@ -69,8 +97,7 @@ int		try_execve(t_d *d)
 	{
 		if ((ptr = ft_strchr(d->buff[0], '/')))
 		{
-			d->path = ft_strdup(d->buff[0]);
-			if (access(d->path, X_OK) == 0)
+			if (try_execve2(d))
 				return (1);
 		}
 		else

@@ -6,13 +6,13 @@
 /*   By: vsteffen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/24 14:56:13 by vsteffen          #+#    #+#             */
-/*   Updated: 2016/05/26 21:08:41 by vsteffen         ###   ########.fr       */
+/*   Updated: 2016/05/27 16:33:47 by vsteffen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char		*ft_envjoin(char const *s1, char const *s2)
+char	*ft_envjoin(char const *s1, char const *s2)
 {
 	size_t	len_t;
 	size_t	len_s1;
@@ -41,20 +41,16 @@ char		*ft_envjoin(char const *s1, char const *s2)
 	return (NULL);
 }
 
-void env_to_char(t_d *d)
+void	env_to_char(t_d *d, int i, int tmp)
 {
 	t_lst	*list;
-	int	i;
-	int	tmp;
 
 	list = d->lst_env;
-	i = 0;
 	while (list)
 	{
 		i++;
 		list = list->next;
 	}
-	tmp = 0;
 	while (d->new_env[tmp])
 	{
 		free(d->new_env[tmp]);
@@ -73,7 +69,7 @@ void env_to_char(t_d *d)
 	d->new_env[tmp] = NULL;
 }
 
-t_lst   *env_to_list(char **env, t_d *d, int i, t_lst *list)
+t_lst	*env_to_list(char **env, t_d *d, int i, t_lst *list)
 {
 	t_lst	*tmp;
 	int		nb;
@@ -96,7 +92,7 @@ t_lst   *env_to_list(char **env, t_d *d, int i, t_lst *list)
 	return (tmp);
 }
 
-int if_no_arg(t_d *d, char *first_arg, int status)
+int		if_no_arg(t_d *d, char *first_arg, int status)
 {
 	if (!first_arg && status == 0)
 	{
@@ -106,14 +102,15 @@ int if_no_arg(t_d *d, char *first_arg, int status)
 	}
 	else if (!first_arg && status == 1)
 	{
-		ft_putstr("Specify a key with a value to add in environment\nUsage: setenv key=value\n");
+		ft_putstr("Specify a key with a value to add in environment\n");
+		ft_putstr("Usage: setenv key=value\n");
 		d->cmd_status = 0;
 		return (0);
 	}
 	return (1);
 }
 
-int ft_env(t_lst *list)
+int		ft_env(t_lst *list)
 {
 	while (list)
 	{

@@ -6,7 +6,7 @@
 /*   By: vsteffen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/12 17:17:11 by vsteffen          #+#    #+#             */
-/*   Updated: 2016/05/26 20:17:16 by vsteffen         ###   ########.fr       */
+/*   Updated: 2016/05/27 18:41:06 by vsteffen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ void		free_arg(char **arg)
 	}
 	free(arg[i]);
 	free(arg);
-	i = 0;
 }
 
 void		struct_ini(t_d *d, char **env)
@@ -35,7 +34,7 @@ void		struct_ini(t_d *d, char **env)
 	d->shlvl = NULL;
 	d->home = NULL;
 	d->shell = NULL;
-	d->exec = malloc(sizeof(d->exec)); //--> don't forget at the end to free him
+	d->exec = malloc(sizeof(d->exec));
 	d->exec[0] = NULL;
 	d->new_env = malloc(sizeof(d->new_env));
 	d->new_env[0] = NULL;
@@ -53,11 +52,11 @@ int			ft_isbuiltin(t_d *d)
 		exit(0);
 	}
 	if (ft_strequ(d->buff[0], "setenv"))
-		return (ft_setenv(d));
+		return (ft_setenv(d, 1));
 	if (ft_strequ(d->buff[0], "env"))
 		return (ft_env(d->lst_env));
 	if (ft_strequ(d->buff[0], "unsetenv"))
-		return (ft_unsetenv(d));
+		return (ft_unsetenv(d, 1));
 	if (ft_strequ(d->buff[0], "cd"))
 		return (ft_cd(d));
 	return (0);
@@ -72,9 +71,10 @@ void		main2(t_d *d)
 int			main(int ac, char **av, char **env)
 {
 	pid_t		father;
-	t_lst		*list;
 	t_d			d;
 
+	av[ac] = av[ac];
+	father = 0;
 	struct_ini(&d, env);
 	while (get_next_line(0, &(d.gnl_buff)))
 	{

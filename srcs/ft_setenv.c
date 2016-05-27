@@ -6,7 +6,7 @@
 /*   By: vsteffen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/24 14:51:00 by vsteffen          #+#    #+#             */
-/*   Updated: 2016/05/26 21:08:55 by vsteffen         ###   ########.fr       */
+/*   Updated: 2016/05/27 16:50:04 by vsteffen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int		key_exist(t_lst *list, char *key, char *value, t_d *d)
 	return (0);
 }
 
-void ft_add_env(t_d *d, char *key, char *value)
+void	ft_add_env(t_d *d, char *key, char *value)
 {
 	t_lst		*list;
 
@@ -47,23 +47,27 @@ void ft_add_env(t_d *d, char *key, char *value)
 	}
 }
 
-int	 	ft_setenv(t_d *d)
+void	ft_setenv2(t_d *d, int *arg)
 {
-	int	arg;
-	char *ptr;
-	char *key;
-	char *value;
+	ft_superstr("Invalid key or value for \"", d->buff[*arg],
+			"\"\nUsage: setenv key=value\n", NULL);
+	d->cmd_status = 0;
+	(*arg)++;
+}
 
-	arg = 1;
+int		ft_setenv(t_d *d, int arg)
+{
+	char	*ptr;
+	char	*key;
+	char	*value;
+
 	if_no_arg(d, d->buff[arg], 1);
 	while (d->buff[arg] != '\0')
 	{
 		ptr = ft_strchr(d->buff[arg], '=');
 		if (ptr == NULL || d->buff[arg][0] == '=')
 		{
-			ft_superstr("Invalid key or value for \"", d->buff[arg], "\"\nUsage: setenv key=value\n", NULL);
-			d->cmd_status = 0;
-			arg++;
+			ft_setenv2(d, &arg);
 			continue ;
 		}
 		key = ft_strsub(d->buff[arg], 0, ptr - d->buff[arg]);
